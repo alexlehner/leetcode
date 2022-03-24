@@ -36,17 +36,29 @@ const isValid = (str) => {
     return false;
   }
 
-  let lStr = str;
-  while (lStr.length) {
-    const pair = lStr.substring(0, 2);
-    if (!['()', '[]', '{}'].includes(pair)) {
+  // Setup key value pair lookup
+  const map = new Map();
+  map.set('(', ')');
+  map.set('[', ']');
+  map.set('{', '}');
+
+  // Store a list of openers as our DS
+  const stack = [];
+
+  for (const char of str) {
+    if (map.has(char)) {
+      // If char is a known starting character, load it in the stack
+      stack.push(char);
+    } else if (stack.length > 0 && char === map.get(stack[stack.length - 1])) {
+      // If it's a closing bracket for the most recent stack item, drop that item
+      stack.pop();
+    } else {
+      // This is either an invalid char or doesn't match with the sequence
       return false;
     }
-
-    lStr = lStr.substring(2, lStr.length);
   }
 
-  return true;
+  return stack.length === 0;
 };
 
 describe('valid-parentheses', () => {
@@ -71,7 +83,7 @@ describe('valid-parentheses', () => {
   });
 
   test('nested parens', () => {
-    const ans = isValid('{[]}');
+    const ans = isValid('{{[]}}');
     expect(ans).toEqual(true);
   });
 });
