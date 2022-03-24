@@ -1,10 +1,11 @@
 {
   "name": "leetcode",
   "version": "1.0.0",
-  "description": "Workspace for leetcode and other algorithm questions",
+  "description": "Workspace for Leetcode and other algorithm questions",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/alexlehner/leetcode/issues"
   },
-  "homepage": "https://github.com/alexlehner/leetcode#readme"
+  "homepage": "https://github.com/alexlehner/leetcode#readme",
+  "devDependencies": {
+    "@babel/eslint-plugin": "^7.17.7",
+    "@shopify/eslint-plugin": "^41.2.0",
+    "@shopify/prettier-config": "^1.1.2",
+    "eslint": "^8.11.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.0"
+  },
+  "prettier": "@shopify/prettier-config"
 }
